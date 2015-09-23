@@ -1,0 +1,13 @@
+---
+server_install: True
+vagrant_local_install: True
+nginx_install: True
+mariadb_install: True
+php_install: True
+phpmyadmin_install: True
+xdebug_install: True
+composer_install: True
+mailcatcher_install: True
+magerun_install: True
+redis_install: True
+magento_install: True

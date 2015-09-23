@@ -1,0 +1,25 @@
+---
+- name: server | Update apt
+  apt: update_cache=yes
+
+- name: server | Install System Packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - curl
+    - wget
+    - python-software-properties
+    - vim
+
+- name: server | Install Extra Packages
+  apt: pkg={{ item }} state=latest
+  with_items: server.packages
+  when: server.packages is defined
+
+- name: server | Configure the timezone
+  template: src=timezone.tpl dest=/etc/timezone
+
+- name: server | More Configure the timezone
+  file: src=/usr/share/zoneinfo/{{server.timezone}} dest=/etc/localtime state=link force=yes backup=yes
+
+- name: server | Set default system language pack
+  shell: locale-gen {{server.locale}}

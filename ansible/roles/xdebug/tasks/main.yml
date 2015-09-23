@@ -1,0 +1,7 @@
+---
+- name: xdebug | Install
+  apt: pkg=php5-xdebug state=latest
+
+- name: xdebug | Change xdebug config
+  template: src=default.tpl dest=/etc/php5/mods-available/xdebug.ini
+  notify: restart php-fpm

@@ -1,0 +1,12 @@
+---
+- name: phpmyadmin | Ensure PHPMyAdmin is installed.
+  apt: pkg=phpmyadmin state=installed
+
+- name: phpmyadmin | Change default nginx site
+  template: src=default.tpl dest=/etc/phpmyadmin/nginx-php5-fpm.conf
+
+- name: phpmyadmin | Ensure PHPMyAdmin config file is included in Nginx config.
+  shell: ln -s /etc/phpmyadmin/nginx-php5-fpm.conf {{ nginx.locations_dir }}phpmyadmin.conf
+
+- name: phpmyadmin | Restart nginx
+  service: name=nginx enabled=yes state=restarted

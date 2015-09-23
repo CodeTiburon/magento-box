@@ -1,0 +1,34 @@
+---
+- name: mailcatcher | Add brightbox ppa repository for Ruby 1.9
+  apt_repository: repo=ppa:brightbox/ruby-ng update_cache=yes
+
+- name: mailcatcher | Install dependencies
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - ruby1.9.3
+    - libsqlite3-dev
+
+# it takes a while to gem install, and I'm not bothered about upgrading
+- name: mailcatcher | Check if programm is already installed
+  command: gem list
+  register: gem_list
+  changed_when: False
+
+- name: mailcatcher | Install
+  # we need to have a login shell to use 1.9 gem, so we can't use ansible gem
+  command: bash -lc "gem install mailcatcher"
+  when: '"mailcatcher" not in gem_list.stdout'
+
+- name: mailcatcher | Install service definition
+  template: src=mailcatcher.conf.tpl dest=/etc/init/mailcatcher.conf
+
+- name: mailcatcher | Start
+  service: name=mailcatcher state=started
+
+- name: mailcatcher | Add to php config
+  template: src=mailcatcher.ini.tpl dest=/etc/php5/mods-available/mailcatcher.ini
+  notify: restart php5-fpm
+
+- name: mailcatcher | Enable php config
+  command: php5enmod mailcatcher creates=/etc/php5/conf.d/20-mailcatcher.ini
+  notify: restart php5-fpm

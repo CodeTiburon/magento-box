@@ -1,0 +1,30 @@
+---
+- name: magento | Clone  the latest version
+  git: repo=https://github.com/OpenMage/magento-mirror.git dest={{ magento.docroot }}
+
+- name: magento | Remove git config from the cloned copy
+  command: rm -rf {{ magento.docroot }}/.git
+
+- name: magento | Create DB
+  mysql_db: name={{ magento.database.name }} state=present login_user=root login_password={{ mariadb.root_password }}
+
+- name: magento | Create DB user
+  mysql_user:
+    name: "{{ magento.database.user }}"
+    password: "{{ magento.database.password }}"
+    priv: "{{ magento.database.name }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mariadb.root_password }}"
+
+- name: magento | Set app folder as default web-root
+  template: src=default.tpl dest=/etc/nginx/sites-available/default
+
+- name: magento | Restart nginx
+  service: name=nginx enabled=yes state=restarted  
+
+- name: magento | Add install script to app directory
+  template: src=install.sh.tpl dest=/var/tmp/install.sh mode=700
+
+- name: magento | Install
+  shell: cd /vagrant/magento/ && sh /var/tmp/install.sh

@@ -1,0 +1,10 @@
+---
+- name: nginx | Install
+  apt: pkg=nginx state=latest
+
+- name: nginx | Create locations directory
+  shell: mkdir {{ nginx.locations_dir }}
+
+- name: nginx | Set default site config
+  template: src=server.conf.tpl dest=/etc/nginx/sites-available/default
+  notify: restart nginx

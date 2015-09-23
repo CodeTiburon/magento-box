@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo: true 
+  roles:  
+    - { role: server, when: "{{ server_install }}" }
+    - { role: vagrant_local, when: "{{ vagrant_local_install }}" }
+    - { role: nginx, when: "{{ nginx_install }}"}
+    - { role: mariadb, when: "{{ mariadb_install }}" }
+    - { role: php, when: "{{ php_install }}" }
+    - { role: phpmyadmin, when: "{{ phpmyadmin_install }}" }
+    - { role: xdebug, when: "{{ xdebug_install }}" }
+    - { role: composer, when: "{{ composer_install }}" }
+    - { role: mailcatcher, when: "{{ mailcatcher_install }}" }
+    - { role: magerun, when: "{{ magerun_install }}" }
+    - { role: magento, when: "{{ magento_install }}" }
+    - { role: redis, when: "{{ redis_install }}" }

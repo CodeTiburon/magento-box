@@ -1,0 +1,26 @@
+---
+server:
+    packages: [vim, htop, imagemagick, unzip, python-mysqldb, git-core]
+    timezone: UTC
+    locale: en_US.UTF-8
+vagrant_local:
+    hostname: "{{ magento.url }}"
+    root: '/vagrant'
+nginx:
+    servername: magento_app
+    locations_dir: '/etc/nginx/locations/'
+mariadb:
+    root_password: '123'
+php:
+    ppa: php5-5.6
+    packages: [php5-cli, php5-intl, php5-mcrypt, php5-mysql, php5-dev, php-pear]
+magento:
+    docroot: /vagrant/magento
+    database:
+        name: magento
+        user: magento_user
+        password: '9\7%^1K2,31=70y'
+    admin: 
+        user: admin
+        password: admin123
+    url: 'magento-store.dev'

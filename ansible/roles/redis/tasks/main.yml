@@ -1,0 +1,9 @@
+---
+- name: redis | Add brightbox ppa repository for Redis
+  apt_repository: repo=ppa:chris-lea/redis-server update_cache=yes
+
+- name: redis | Ensure required packages are installed
+  apt: pkg=redis-server state=latest
+
+- name: redis | Start redis-server
+  command: redis-server /etc/redis/redis.conf
