@@ -34,4 +34,6 @@ Ansible automatically installs next software and tools:
 
 Stops e-mails going to their intended recipients and instead shows them in a web interface, which is at http://192.168.33.99:82, which allows you to see the e-mails that have been sent.
 
+### Troubleshooting
+1) in case of no downloading boxes or other on win7 with empty error install <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=5555">MS Visual C++ 2010 x86 Redistributables</a> 
 
