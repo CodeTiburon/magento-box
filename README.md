@@ -38,3 +38,13 @@ Stops e-mails going to their intended recipients and instead shows them in a web
 1) in case of no downloading boxes or other on win7 with empty error install <a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=5555">MS Visual C++ 2010 x86 Redistributables</a>
 2) in case of "vagrant up" timeout enable cpu virtualization in BIOS, check VM messages with "v.gui = true" for "magento_ansible"
 
+
+# License
+
+WordPress application Box is available under the [MIT license](https://github.com/CodeTiburon/magento-box/blob/master/LICENSE.md). 
+
+# More Info
+
+Have a question? Please [open an issue](https://github.com/CodeTiburon/magento-box/issues/new)! 
+
+Copyright © 2015-2016 [CodeTiburon](https://codetiburon.com)
