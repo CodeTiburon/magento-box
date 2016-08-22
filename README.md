@@ -41,7 +41,7 @@ Stops e-mails going to their intended recipients and instead shows them in a web
 
 # License
 
-WordPress application Box is available under the [MIT license](https://github.com/CodeTiburon/magento-box/blob/master/LICENSE.md). 
+Magento application Box is available under the [MIT license](https://github.com/CodeTiburon/magento-box/blob/master/LICENSE.md). 
 
 # More Info
 
